@@ -1,0 +1,79 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: hello-feign-client
+#  cloud:
+#    loadbalancer:
+#      retry:
+#        enabled: true
+
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://dev.ufotosoft.com:8093/eureka/
+      defaultZone: http://localhost:8093/eureka/
+
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 3
+    lease-renewal-interval-in-seconds: 3
+
+
+logging:
+#  config: logback-spring.xml
+  level:
+    root: warn
+    org.springframework.retry: debug
+#    com.netflix.ribbon: debug
+#    org.springframework.cloud.netflix.ribbon: debug
+#    feign: debug
+#    com.netflix.hystrix: debug
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+#          strategy: THREAD
+#          thread:
+#            timeoutInMilliseconds: 20000
+        timeout:
+          enabled: false
+#          enabled: true
+
+feign:
+  httpclient:
+    enabled: true
+    max-connections: 200 # default to 200
+    max-connections-per-route: 50 # default to 50
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 3000
+        loggerLevel: basic
+#        retryer: feign.Retryer.Default # 需要配置bean, 会与ribbon的retry累乘, 不推荐用这个
+
+
+ribbon: # feign仅用了ribbon的load balancing功能和retry, ribbon包中所带的http client并没有被feign用到, feign用的是自己携带的http client
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+#  ConnectTimeout: 2500
+#  ReadTimeout: 2500
+#  MaxConnectionsPerHost: 250 #default 50
+#  MaxTotalConnections: 2500 #default 200
+#  eager-load:
+#    enabled: true
+#    clients:
+#      - ribbon-practice-server-say-hello
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

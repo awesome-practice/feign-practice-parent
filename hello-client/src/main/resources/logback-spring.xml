@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--<appender name="APPENDER-CIRCUIT-BREAKER" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>logs/circuit-breaker.log</file>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>logs/circuit-breaker.%d.log</fileNamePattern>-->
+            <!--&lt;!&ndash; 最多保持30天的历史日志数据   如果30天内的数据大于3GB将会按时间清除老日志文件 &ndash;&gt;-->
+            <!--<maxHistory>30</maxHistory>-->
+            <!--<totalSizeCap>3GB</totalSizeCap>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+            <!--&lt;!&ndash;格式化输出：%d表示日期，%msg：日志消息，%n是换行符&ndash;&gt;-->
+            <!--<pattern>%date %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <!--<logger name="LOGGER-CIRCUIT-BREAKER" level="WARN">-->
+        <!--<appender-ref ref="APPENDER-CIRCUIT-BREAKER"/>-->
+    <!--</logger>-->
+
+</configuration>
